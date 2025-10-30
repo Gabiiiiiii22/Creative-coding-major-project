@@ -7,6 +7,15 @@ function setup() {
 function draw() {
   background(232, 232, 225, 100);
   addHorizontalBar(0, 550, 25, 800);
+  addHorizontalBar(0, 650, 25, 800);
+  addHorizontalBar(0, 725, 25, 300);
+  addHorizontalBar(0, 425, 25, 800);
+  addHorizontalBar(0, 350, 25, 526);
+  addHorizontalBar(600, 350, 25, 200);
+  addHorizontalBar(0, 255, 25, 600);
+  addHorizontalBar(0, 125, 25, 800);
+  addHorizontalBar(100, 50, 75, 25);
+  addHorizontalBar(0, 25, 25, 76);
 }
 
 function addHorizontalBar(x, y, h, w) {
