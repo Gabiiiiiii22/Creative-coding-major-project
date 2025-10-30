@@ -1,1 +1,16 @@
+function setup() {
+  createCanvas(800, 800);
+  colorMode(RGB);
+  noLoop();
+}
 
+function draw() {
+  background(232, 232, 225, 100);
+  addHorizontalBar(0, 550, 25, 800);
+}
+
+function addHorizontalBar(x, y, h, w) {
+  noStroke();
+  fill(223, 195, 36, 100); 
+  rect(x, y, w, h);
+}
