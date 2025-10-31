@@ -57,15 +57,25 @@ function scaledRect(x, y, w, h) {
   rect(ox + x * sx, oy + y * sy, w * sx, h * sy);
 }
 
+class Bar{
+   constructor(x, y, w, h){
+    this.x=x;
+    this.y=y;
+    this.w=w;
+    this.h=h;
+}
+display(){
+   nostroke();
+   fill(233, 195, 36, 100);
+   sacledRect(this.x, this.y, this.w, this,h);
+}
+}
+
 function addHorizontalBar(x, y, h, w) {
-  noStroke();
-  fill(223, 195, 36, 100);
-  scaledRect(x, y, w, h);
+  class Bar(x, y, h, w).display();
 }
 
 function addVerticalBar(x, y, h, w) {
-  noStroke();
-  fill(223, 195, 36, 100);
-  scaledRect(x, y, w, h);
+  class Bar(x, y, h, w).display();
 }
 
