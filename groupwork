@@ -1,10 +1,9 @@
-
 const BASE_W = 800;
 const BASE_H = 800;
 
 const PRESERVE_ASPECT = false;
 
-let sx, sy, ox, oy; 
+let sx, sy, ox, oy;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -15,7 +14,8 @@ function setup() {
 function draw() {
   computeScale();
   background(232, 232, 225, 100);
-  
+
+
   addHorizontalBar(0, 550, 25, 800);
   addHorizontalBar(0, 650, 25, 800);
   addHorizontalBar(0, 725, 25, 300);
@@ -26,6 +26,7 @@ function draw() {
   addHorizontalBar(0, 125, 25, 800);
   addHorizontalBar(100, 50, 25, 75);
   addHorizontalBar(0, 25, 25, 76);
+
 
   addVerticalBar(75, 0, 800, 25);
   addVerticalBar(175, 0, 800, 25);
@@ -57,25 +58,27 @@ function scaledRect(x, y, w, h) {
   rect(ox + x * sx, oy + y * sy, w * sx, h * sy);
 }
 
-class Bar{
-   constructor(x, y, w, h){
-    this.x=x;
-    this.y=y;
-    this.w=w;
-    this.h=h;
-}
-display(){
-   nostroke();
-   fill(233, 195, 36, 100);
-   sacledRect(this.x, this.y, this.w, this,h);
-}
+class Bar {
+  constructor(x, y, w, h) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+  }
+  display() {
+    noStroke();
+    fill(223, 195, 36, 100);
+    scaledRect(this.x, this.y, this.w, this.h);
+  }
 }
 
+
 function addHorizontalBar(x, y, h, w) {
-  class Bar(x, y, h, w).display();
+  new Bar(x, y, w, h).display();
 }
 
 function addVerticalBar(x, y, h, w) {
-  class Bar(x, y, h, w).display();
+  new Bar(x, y, w, h).display();
 }
+
 
