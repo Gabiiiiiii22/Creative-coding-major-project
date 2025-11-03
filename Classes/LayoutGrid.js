@@ -10,7 +10,7 @@
     // Method to calculate how big each grid cell will be based on the window size
     updateCellSize() {
         let artWorkSize = min(windowWidth, windowHeight) - 40; // Calculate canvas size with 20px padding each size
-        this.cellSize = artWorkSize / this.cols; // Calculate cell size by dividing the canvas size by the number of columns
+        this.cellSize = artWorkSize / this.cols; // Calculate cell size by dividing the art work size by the number of columns
         this.canvasSize = artWorkSize; // Store canvas size to use later when resizing
     }
 
@@ -43,11 +43,17 @@
     }
 
     getCanvasSize() {
-         return this.canvasSize;
+         return this.canvasSize; //// Output whatever the current size is)
     }
 
-    handleResize() { // to call in sketch.js and update cellsize base on the new canvas size
-        this.updateCellSize();
-        resizeCanvas(this.canvasSize, this.canvasSize);
+    handleResize() { // to call in sketch.js and update cell size base on the new canvas size
+        
+        // Calls the updateCellSize() method
+        // Gets new window dimensions
+        // Calculates new canvas size
+        // Calculates new cell size:
+        this.updateCellSize(); 
+        
+        resizeCanvas(this.canvasSize, this.canvasSize); // updates p5.js canvas
      }
 }

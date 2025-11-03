@@ -1,5 +1,9 @@
+// This class manages all the colors used in the artwork
+
 class ColorManager {
   constructor() {
+
+    // Store all colors in a palette object with its key (name) and HEX code
     this.palette = {
       background: '#E8E8E1',
       yellow: '#DFC324',
@@ -8,11 +12,11 @@ class ColorManager {
       blue2: '#0351A0',
       red1: '#AB2727',
       red2: '#A9201E',
-      black: '#000000'
     };
   }
 
-  getAllColors() {
-    return this.palette;
-  }
+    // Method to get all colors at once, for layoutGrid to call to pass the colours to the blocks when add new block
+     getAllColors() {
+        return this.palette;
+     }
 }
