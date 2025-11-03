@@ -9,9 +9,9 @@
 
     // Method to calculate how big each grid cell will be based on the window size
     updateCellSize() {
-        let size = min(windowWidth, windowHeight) - 40; // Calculate canvas size with 20px padding each size
-        this.cellSize = size / this.cols; // Calculate cell size by dividing the canvas size by the number of columns
-        this.canvasSize = size; // Store canvas size to use later when resizing
+        let artWorkSize = min(windowWidth, windowHeight) - 40; // Calculate canvas size with 20px padding each size
+        this.cellSize = artWorkSize / this.cols; // Calculate cell size by dividing the canvas size by the number of columns
+        this.canvasSize = artWorkSize; // Store canvas size to use later when resizing
     }
 
     // add block to the layout grid
@@ -32,6 +32,10 @@
         return this.addBlock(row, startCol, 1, colSpan, colorKey); // always makes it 1 row tall, so it's a bar
     }
 
+    addVerticalBar(col, startRow, rowSpan, colorKey) {
+        return this.addBlock(startRow, col, rowSpan, 1, colorKey); // always makes it 1 column wide
+    }
+
     display() {
         for (let block of this.blocks) {
          block.display(this.cellSize);
@@ -42,8 +46,8 @@
          return this.canvasSize;
     }
 
-    handleResize() {
+    handleResize() { // to call in sketch.js and update cellsize base on the new canvas size
         this.updateCellSize();
-    resizeCanvas(this.canvasSize, this.canvasSize);
+        resizeCanvas(this.canvasSize, this.canvasSize);
      }
 }
