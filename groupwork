@@ -1,40 +1,65 @@
-
+const BLOCK = 25;
 const BASE_W = 800;
 const BASE_H = 800;
-
 const PRESERVE_ASPECT = false;
 
-let sx, sy, ox, oy; 
+let sx, sy, ox, oy;
+
+let addHorizontalBar = [];
+let addVerticalBar = [];
+
+class Bar {
+  constructor(x, y, w, h, type) {
+    this.x = x * BLOCK;
+    this.y = y * BLOCK;
+    this.w = w * BLOCK;
+    this.h = h * BLOCK;
+    this.type = type;
+    this.color = this.assignColor();
+  }
+
+  assignColor() {
+    const colors = {
+      yellow: color(223, 195, 36, 100)
+    };
+    return colors[this.type] || color(random(255), random(255), random(255));
+  }
+
+  display() {
+    noStroke();
+    fill(this.color); 
+    rect(ox + this.x * sx, oy + this.y * sy, this.w * sx, this.h * sy);
+  }
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   colorMode(RGB);
   noLoop();
-}
 
-function draw() {
-  computeScale();
-  background(232, 232, 225, 100);
-  
-  addHorizontalBar(0, 550, 25, 800);
-  addHorizontalBar(0, 650, 25, 800);
-  addHorizontalBar(0, 725, 25, 300);
-  addHorizontalBar(0, 425, 25, 800);
-  addHorizontalBar(0, 350, 25, 526);
-  addHorizontalBar(600, 350, 25, 200);
-  addHorizontalBar(0, 255, 25, 600);
-  addHorizontalBar(0, 125, 25, 800);
-  addHorizontalBar(100, 50, 25, 75);
-  addHorizontalBar(0, 25, 25, 76);
+  addHorizontalBar = [
+    new Bar(0, 22, 32, 1, "yellow"),
+    new Bar(0, 26, 32, 1, "yellow"),
+    new Bar(0, 29, 12, 1, "yellow"),
+    new Bar(0, 17, 32, 1, "yellow"),
+    new Bar(0, 14, 21, 1, "yellow"),
+    new Bar(24, 14, 8, 1, "yellow"),
+    new Bar(0, 10, 24, 1, "yellow"),
+    new Bar(0, 5, 32, 1, "yellow"),
+    new Bar(4, 2, 3, 1, "yellow"),
+    new Bar(0, 1, 3, 1, "yellow"),
+  ];
 
-  addVerticalBar(75, 0, 800, 25);
-  addVerticalBar(175, 0, 800, 25);
-  addVerticalBar(300, 0, 800, 25);
-  addVerticalBar(525, 0, 425, 25);
-  addVerticalBar(600, 150, 275, 25);
-  addVerticalBar(700, 175, 125, 100);
-  addVerticalBar(450, 450, 350, 25);
-  addVerticalBar(625, 450, 350, 25);
+  addVerticalBar = [
+    new Bar(3, 0, 1, 32, "yellow"),
+    new Bar(7, 0, 1, 32, "yellow"),
+    new Bar(12, 0, 1, 32, "yellow"),
+    new Bar(21, 0, 1, 17, "yellow"),
+    new Bar(24, 6, 1, 11, "yellow"),
+    new Bar(28, 7, 4, 5, "yellow"),
+    new Bar(18, 18, 1, 14, "yellow"),
+    new Bar(25, 18, 1, 14, "yellow"),
+  ];
 }
 
 function computeScale() {
@@ -53,29 +78,15 @@ function computeScale() {
   }
 }
 
-function scaledRect(x, y, w, h) {
-  rect(ox + x * sx, oy + y * sy, w * sx, h * sy);
+function draw() {
+  computeScale();
+  background(232, 232, 225, 100);
+  for (const b of addHorizontalBar) b.display();
+  for (const b of addVerticalBar) b.display();
 }
 
-class Bar{
-   constructor(x, y, w, h){
-    this.x=x;
-    this.y=y;
-    this.w=w;
-    this.h=h;
-}
-display(){
-   nostroke();
-   fill(233, 195, 36, 100);
-   sacledRect(this.x, this.y, this.w, this,h);
-}
-}
-
-function addHorizontalBar(x, y, h, w) {
-  class Bar(x, y, h, w).display();
-}
-
-function addVerticalBar(x, y, h, w) {
-  class Bar(x, y, h, w).display();
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  redraw();
 }
 
