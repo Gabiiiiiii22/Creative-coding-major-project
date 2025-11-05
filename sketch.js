@@ -48,7 +48,7 @@ function loadBlocksFromCSV(table, grid) {
   }
 }
 
-function draw() {
+function draw() { //add bars (horizontal/ vertical) here
     
     // Set background color
     background(colorManager.palette.background);
