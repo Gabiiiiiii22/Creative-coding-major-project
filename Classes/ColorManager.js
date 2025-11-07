@@ -7,7 +7,7 @@ class ColorManager {
     this.palette = {
       background: '#E8E8E1',
       yellow: '#DFC324',
-      gray: '#BDBFBB',
+      grey: '#BDBFBB',
       blue1: '#013577',
       blue2: '#0351A0',
       red: '#AB2727',

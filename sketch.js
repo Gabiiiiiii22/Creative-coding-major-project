@@ -5,7 +5,7 @@ console.log('p5.js version:', p5.VERSION); // check p5.js version
 
 function preload() {
     //put the csv files here :))))
-    greyData = loadTable('data/grayBlocks.csv', 'csv', 'header');
+    greyData = loadTable('data/greyBlocks.csv', 'csv', 'header');
     //yellowData = loadTable('data/yellowBlocks.csv', 'csv', 'header');
     blueData = loadTable('data/blueBlocks.csv', 'csv', 'header');
     redData = loadTable('data/redBlocks.csv', 'csv', 'header');
