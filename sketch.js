@@ -7,7 +7,7 @@ function preload() {
     //put the csv files here :))))
     greyData = loadTable('data/grayBlocks.csv', 'csv', 'header');
     //yellowData = loadTable('data/yellowBlocks.csv', 'csv', 'header');
-    //blueData = loadTable('data/blueBlocks.csv', 'csv', 'header');
+    blueData = loadTable('data/blueBlocks.csv', 'csv', 'header');
     redData = loadTable('data/redBlocks.csv', 'csv', 'header');
 }
 
@@ -23,7 +23,7 @@ function setup() {
     // load the blocks
     loadBlocksFromCSV(greyData, grid);
     //loadBlocksFromCSV(yellowData, grid);
-    //loadBlocksFromCSV(blueData, grid);
+    loadBlocksFromCSV(blueData, grid);
     loadBlocksFromCSV(redData, grid);
 
     // Log how many blocks were loaded
