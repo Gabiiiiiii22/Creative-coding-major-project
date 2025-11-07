@@ -8,7 +8,7 @@ function preload() {
     grayData = loadTable('data/grayBlocks.csv', 'csv', 'header');
     //yellowData = loadTable('data/yellowBlocks.csv', 'csv', 'header');
     //blueData = loadTable('data/blueBlocks.csv', 'csv', 'header');
-    //redData = loadTable('data/redBlocks.csv', 'csv', 'header');
+    redData = loadTable('data/redBlocks.csv', 'csv', 'header');
 }
 
 function setup() {
@@ -24,7 +24,7 @@ function setup() {
     loadBlocksFromCSV(grayData, grid);
     //loadBlocksFromCSV(yellowData, grid);
     //loadBlocksFromCSV(blueData, grid);
-    //loadBlocksFromCSV(redData, grid);
+    loadBlocksFromCSV(redData, grid);
 
     // Log how many blocks were loaded
     console.log(`Loaded ${grid.blocks.length} blocks total`);
