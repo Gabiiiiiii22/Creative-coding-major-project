@@ -5,10 +5,10 @@ console.log('p5.js version:', p5.VERSION); // check p5.js version
 
 function preload() {
     //put the csv files here :))))
-    greyData = loadTable('data/greyBlocks.csv', 'csv', 'header');
+    //greyData = loadTable('data/greyBlocks.csv', 'csv', 'header');
     //yellowData = loadTable('data/yellowBlocks.csv', 'csv', 'header');
-    blueData = loadTable('data/blueBlocks.csv', 'csv', 'header');
-    redData = loadTable('data/redBlocks.csv', 'csv', 'header');
+    blockData = loadTable('data/blocks.csv', 'csv', 'header');
+    //redData = loadTable('data/redBlocks.csv', 'csv', 'header');
 }
 
 function setup() {
@@ -21,10 +21,10 @@ function setup() {
     grid = new LayoutGrid(32, 32, colorManager.getAllColors());
 
     // load the blocks
-    loadBlocksFromCSV(greyData, grid);
+    //loadBlocksFromCSV(greyData, grid);
     //loadBlocksFromCSV(yellowData, grid);
-    loadBlocksFromCSV(blueData, grid);
-    loadBlocksFromCSV(redData, grid);
+    loadBlocksFromCSV(blockData, grid);
+    //loadBlocksFromCSV(redData, grid);
 
     // Log how many blocks were loaded
     console.log(`Loaded ${grid.blocks.length} blocks total`);
