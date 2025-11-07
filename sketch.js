@@ -30,7 +30,7 @@ function setup() {
     console.log(`Loaded ${grid.blocks.length} blocks total`);
 }
 
-// Helper function: Load blocks from a CSV table into the grid
+// function to load blocks from a CSV table into the grid
 function loadBlocksFromCSV(table, grid) {
   
     // Loop through each row in the CSV
