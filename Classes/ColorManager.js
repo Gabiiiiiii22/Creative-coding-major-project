@@ -10,8 +10,8 @@ class ColorManager {
       gray: '#BDBFBB',
       blue1: '#013577',
       blue2: '#0351A0',
-      red1: '#AB2727',
-      red2: '#A9201E',
+      red: '#AB2727',
+    
     };
   }
 
