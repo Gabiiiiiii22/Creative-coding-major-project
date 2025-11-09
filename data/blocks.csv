@@ -143,6 +143,9 @@ Row,Col,RowSpan,ColSpan,Color
 30,25,1,1,yellow
 31,7,1,1,yellow
 31,18,1,1,yellow
+1,3,1,1,yellow
+18,25,1,1,yellow
+20,25,2,1,yellow
 0,3,1,1,blue1
 1,7,1,1,blue1
 5,1,1,1,blue1
