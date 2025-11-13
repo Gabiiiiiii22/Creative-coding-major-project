@@ -13,7 +13,7 @@ function setup() {
 
     grid = new LayoutGrid(32, 32, colorManager.getAllColors());
     loadBlocksFromCSV(blockData, grid);
-    
+
     console.log(`Loaded ${grid.blocks.length} blocks total`);
 }
 
@@ -51,22 +51,22 @@ function draw() {
 
     for (let block of grid.blocks) {
 
-        // 1. Calculate scatter location again
+        // Calculate scatter location again
         // technique inspired by p5.js random patterns:
         // https://p5js.org/reference/p5/random/
         let scatterRow = (block.row + block.col * 7.3) % 28;
         let scatterCol = (block.col + block.row * 5.7) % 28;
 
-        // 2. Move scattered → home
+        // Move scattered → home
         let targetRow = lerp(scatterRow, block.row, returnT);
         let targetCol = lerp(scatterCol, block.col, returnT);
         block.moveTo(targetRow, targetCol);
 
-        // 3. Pulsing continues during return
+        // Pulsing continues during return
         if (returnT < 1) {
             // same colour sequence as Phase 2
             // activeColorKey selects one of: "yellow", "blue1", "red", "grey"
-            // reference for object[property]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors
+            // reference for object[property]: 
             if (block.color === colorManager.palette[activeColorKey]) {
                 block.scale = sin((sequenceT % 1) * TWO_PI) * 0.3 + 1;
             } else {
@@ -74,9 +74,18 @@ function draw() {
             }
         }
 
-        // 4. When fully home (returnT == 1) → stop pulsing
+        // When fully home (returnT == 1) → stop pulsing
         if (returnT === 1) {
             block.scale = 1;
+
+            // Fade out randomly after return is complete 
+            // Instantly disappear randomly after return
+            if (returnT === 1) {
+                if (random() < 0.03) {    // 3% chance each frame 
+                    block.opacity = 0;    // instantly gone
+                    // alpha transparency reference: https://p5js.org/reference/p5/alpha/
+                }
+            }
         }
     }
 

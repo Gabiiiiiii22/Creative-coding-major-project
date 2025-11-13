@@ -5,7 +5,7 @@ class Block {
         this.rowSpan = rowSpan;
         this.colSpan = colSpan;
         this.color = color;
-        
+
         //Animation properties
         this.currentX = col;  // Current animated position
         this.currentY = row;
@@ -14,6 +14,7 @@ class Block {
         this.speed = 0.05;    // Movement speed (5% per frame)
 
         this.scale = 1; // updated this to support the scale
+        this.opacity = 255;
     }
 
     // Method to set a new target position
@@ -31,14 +32,14 @@ class Block {
 
     // modified the display() to support the pulsing animation
     display(cellSize) {
-    let w = this.colSpan * cellSize * this.scale;
-    let h = this.rowSpan * cellSize * this.scale;
+        let w = this.colSpan * cellSize * this.scale;
+        let h = this.rowSpan * cellSize * this.scale;
 
-    let x = this.currentX * cellSize - (w - this.colSpan * cellSize) / 2;
-    let y = this.currentY * cellSize - (h - this.rowSpan * cellSize) / 2;
+        let x = this.currentX * cellSize - (w - this.colSpan * cellSize) / 2;
+        let y = this.currentY * cellSize - (h - this.rowSpan * cellSize) / 2;
 
-    fill(this.color);
-    noStroke();
-    rect(x, y, w, h);
-}
+        fill(red(this.color), green(this.color), blue(this.color), this.opacity);
+        noStroke();
+        rect(x, y, w, h);
+    }
 }
