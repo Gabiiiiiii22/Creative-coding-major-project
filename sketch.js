@@ -32,35 +32,50 @@ function draw() {
     background(colorManager.palette.background);
 
     let t = millis() / 1000;
-    // millis reference was taken from the p5.js org site
 
     let scatterDuration = 3;
     let pulseDuration = 5;
+    let returnDuration = 3;
 
-    // Time inside the pulse phase
-    let pulseT = t - scatterDuration;
-    let pulseIndex = floor(pulseT); // 0 to 4
-    // floor() – selecting active colour group reference :
+    // constrain() : https://p5js.org/reference/p5/constrain/
 
+    let returnT = (t - scatterDuration - pulseDuration) / returnDuration;
+    returnT = constrain(returnT, 0, 1);
+
+    // Continue the same colour sequence from Phase 2
+    // floor():https://p5js.org/reference/p5/floor/
     let pulseColors = ["yellow", "blue1", "red", "grey"];
-    let activeColorKey = pulseColors[pulseIndex] || null;
+    let sequenceT = (t - scatterDuration);      // total time since pulsing began
+    let pulseIndex = floor(sequenceT % 4);      // which colour is active
+    let activeColorKey = pulseColors[pulseIndex];
 
     for (let block of grid.blocks) {
 
-        // Keep block in scattered position
+        // 1. Calculate scatter location again
+        // technique inspired by p5.js random patterns:
+        // https://p5js.org/reference/p5/random/
         let scatterRow = (block.row + block.col * 7.3) % 28;
         let scatterCol = (block.col + block.row * 5.7) % 28;
 
-        block.moveTo(scatterRow, scatterCol);
+        // 2. Move scattered → home
+        let targetRow = lerp(scatterRow, block.row, returnT);
+        let targetCol = lerp(scatterCol, block.col, returnT);
+        block.moveTo(targetRow, targetCol);
 
-        // Pulsing effect (scale)
-        if (activeColorKey && block.color === colorManager.palette[activeColorKey]) {
-            // pulse between 1.0 and 1.3
-            let pulse = sin((pulseT % 1) * TWO_PI) * 0.3 + 1; 
-            // p5 sine wave for smooth animation: https://p5js.org/reference/#/p5/sin
-            // full sine cycle reference two_pi: https://p5js.org/reference/p5/TWO_PI/
-            block.scale = pulse;
-        } else {
+        // 3. Pulsing continues during return
+        if (returnT < 1) {
+            // same colour sequence as Phase 2
+            // activeColorKey selects one of: "yellow", "blue1", "red", "grey"
+            // reference for object[property]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors
+            if (block.color === colorManager.palette[activeColorKey]) {
+                block.scale = sin((sequenceT % 1) * TWO_PI) * 0.3 + 1;
+            } else {
+                block.scale = 1;
+            }
+        }
+
+        // 4. When fully home (returnT == 1) → stop pulsing
+        if (returnT === 1) {
             block.scale = 1;
         }
     }
@@ -69,5 +84,3 @@ function draw() {
     grid.display();
 }
 
-// tutorial for reference:
-// Simple sine wave animation in p5.js: https://youtu.be/ktPnruyC6cc?si=BJWWQ9A7_i5VUGv-
