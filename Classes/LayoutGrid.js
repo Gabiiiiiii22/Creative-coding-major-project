@@ -1,61 +1,49 @@
- class LayoutGrid { // blueprint for creating a grid that manages all the blocks.
+class LayoutGrid {
     constructor(rows, cols, colors) {
         this.rows = rows;
         this.cols = cols;
         this.colors = colors;
-        this.blocks = []; // empty array to store all the Blocks created
-        this.updateCellSize(); // calculates the cell size based on current window size.
+        this.blocks = [];
+        this.updateCellSize();
     }
 
-    // Method to calculate how big each grid cell will be based on the window size
     updateCellSize() {
-        let artWorkSize = min(windowWidth, windowHeight) - 40; // Calculate canvas size with 20px padding each size
-        this.cellSize = artWorkSize / this.cols; // Calculate cell size by dividing the art work size by the number of columns
-        this.canvasSize = artWorkSize; // Store canvas size to use later when resizing
+        let artWorkSize = min(windowWidth, windowHeight) - 40;
+        this.cellSize = artWorkSize / this.cols;
+        this.canvasSize = artWorkSize;
     }
 
-    // add block to the layout grid
     addBlock(row, col, rowSpan, colSpan, colorKey) {
         const block = new Block(
-        row, 
-        col, 
-        rowSpan, // how many rows tall 
-        colSpan, // how many columns wide
-        this.colors[colorKey]
+            row, 
+            col, 
+            rowSpan,
+            colSpan,
+            this.colors[colorKey]
         );
-        this.blocks.push(block); // Adds the new block to the array of all blocks
+        this.blocks.push(block);
         return block;
     }
-    /* Helper function to add block in horizontal bar base on column/row span inputted to be used in phase 2
-    
-    addHorizontalBar(row, startCol, colSpan, colorKey) {
-        return this.addBlock(row, startCol, 1, colSpan, colorKey); // always makes it 1 row tall, so it's a bar
-    }
 
-    
-    addVerticalBar(col, startRow, rowSpan, colorKey) {
-        return this.addBlock(startRow, col, rowSpan, 1, colorKey); // always makes it 1 column wide
+    // Update all blocks' animations
+    update() {
+        for (let block of this.blocks) {
+            block.update();
+        }
     }
-    */
 
     display() {
         for (let block of this.blocks) {
-         block.display(this.cellSize);
+            block.display(this.cellSize);
         }
     }
 
     getCanvasSize() {
-         return this.canvasSize; //// Output whatever the current size is)
+        return this.canvasSize;
     }
 
-    handleResize() { // to call in sketch.js and update cell size base on the new canvas size
-        
-        // Calls the updateCellSize() method
-        // Gets new window dimensions
-        // Calculates new canvas size
-        // Calculates new cell size:
-        this.updateCellSize(); 
-        
-        resizeCanvas(this.canvasSize, this.canvasSize); // updates p5.js canvas
-     }
+    handleResize() {
+        this.updateCellSize();
+        resizeCanvas(this.canvasSize, this.canvasSize);
+    }
 }
