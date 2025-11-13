@@ -12,6 +12,8 @@ class Block {
         this.targetX = col;   // Target position to move towards
         this.targetY = row;
         this.speed = 0.05;    // Movement speed (5% per frame)
+
+        this.scale = 1; // updated this to support the scale
     }
 
     // Method to set a new target position
@@ -27,15 +29,16 @@ class Block {
         this.currentY = lerp(this.currentY, this.targetY, this.speed);
     }
 
+    // modified the display() to support the pulsing animation
     display(cellSize) {
-        // Use currentX/currentY instead of col/row for smooth animation
-        let x = this.currentX * cellSize;
-        let y = this.currentY * cellSize;
-        let w = this.colSpan * cellSize;
-        let h = this.rowSpan * cellSize;
-    
-        fill(this.color);
-        noStroke();
-        rect(x, y, w, h);
-    }
+    let w = this.colSpan * cellSize * this.scale;
+    let h = this.rowSpan * cellSize * this.scale;
+
+    let x = this.currentX * cellSize - (w - this.colSpan * cellSize) / 2;
+    let y = this.currentY * cellSize - (h - this.rowSpan * cellSize) / 2;
+
+    fill(this.color);
+    noStroke();
+    rect(x, y, w, h);
+}
 }
