@@ -31,28 +31,43 @@ function loadBlocksFromCSV(table, grid) {
 function draw() {
     background(colorManager.palette.background);
 
-    let t = millis() / 1000;  // time in seconds
+    let t = millis() / 1000;
+    // millis reference was taken from the p5.js org site
+
     let scatterDuration = 3;
+    let pulseDuration = 5;
 
-    // Scatter progress from 0 → 1
-    let progress = constrain(t / scatterDuration, 0, 1);
+    // Time inside the pulse phase
+    let pulseT = t - scatterDuration;
+    let pulseIndex = floor(pulseT); // 0 to 4
+    // floor() – selecting active colour group reference :
 
-    let centerRow = 16;
-    let centerCol = 16;
+    let pulseColors = ["yellow", "blue1", "red", "grey"];
+    let activeColorKey = pulseColors[pulseIndex] || null;
 
     for (let block of grid.blocks) {
 
-        // Generate deterministic scatter target
+        // Keep block in scattered position
         let scatterRow = (block.row + block.col * 7.3) % 28;
         let scatterCol = (block.col + block.row * 5.7) % 28;
 
-        // Move towards scattered location gradually
-        let targetRow = lerp(block.row, scatterRow, progress);
-        let targetCol = lerp(block.col, scatterCol, progress);
+        block.moveTo(scatterRow, scatterCol);
 
-        block.moveTo(targetRow, targetCol);
+        // Pulsing effect (scale)
+        if (activeColorKey && block.color === colorManager.palette[activeColorKey]) {
+            // pulse between 1.0 and 1.3
+            let pulse = sin((pulseT % 1) * TWO_PI) * 0.3 + 1; 
+            // p5 sine wave for smooth animation: https://p5js.org/reference/#/p5/sin
+            // full sine cycle reference two_pi: https://p5js.org/reference/p5/TWO_PI/
+            block.scale = pulse;
+        } else {
+            block.scale = 1;
+        }
     }
 
     grid.update();
     grid.display();
 }
+
+// tutorial for reference:
+// Simple sine wave animation in p5.js: https://youtu.be/ktPnruyC6cc?si=BJWWQ9A7_i5VUGv-
