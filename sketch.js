@@ -30,14 +30,29 @@ function loadBlocksFromCSV(table, grid) {
 
 function draw() {
     background(colorManager.palette.background);
-    
-    // Update all block animations each frame
-    grid.update();
-    
-    grid.display();
-    
-}
 
-function windowResized() {
-    grid.handleResize();
+    let t = millis() / 1000;  // time in seconds
+    let scatterDuration = 3;
+
+    // Scatter progress from 0 → 1
+    let progress = constrain(t / scatterDuration, 0, 1);
+
+    let centerRow = 16;
+    let centerCol = 16;
+
+    for (let block of grid.blocks) {
+
+        // Generate deterministic scatter target
+        let scatterRow = (block.row + block.col * 7.3) % 28;
+        let scatterCol = (block.col + block.row * 5.7) % 28;
+
+        // Move towards scattered location gradually
+        let targetRow = lerp(block.row, scatterRow, progress);
+        let targetCol = lerp(block.col, scatterCol, progress);
+
+        block.moveTo(targetRow, targetCol);
+    }
+
+    grid.update();
+    grid.display();
 }
