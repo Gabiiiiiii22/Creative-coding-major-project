@@ -26,17 +26,17 @@
         this.blocks.push(block); // Adds the new block to the array of all blocks
         return block;
     }
-    /* Helper function to add block in horizontal bar base on column/row span inputted to be used in phase 2
     
+    //Helper function to add block in horizontal bar base on column/row span inputted to be used in phase 2
     addHorizontalBar(row, startCol, colSpan, colorKey) {
-        return this.addBlock(row, startCol, 1, colSpan, colorKey); // always makes it 1 row tall, so it's a bar
+        return this.addBlock(row, startCol, 1, colSpan, 'yellow'); // always makes it 1 row tall and yellow, so it's a bar
     }
 
     
     addVerticalBar(col, startRow, rowSpan, colorKey) {
-        return this.addBlock(startRow, col, rowSpan, 1, colorKey); // always makes it 1 column wide
+        return this.addBlock(startRow, col, rowSpan, 1, 'yellow'); // always makes it 1 column wide and yellow
     }
-    */
+    
 
     display() {
         for (let block of this.blocks) {

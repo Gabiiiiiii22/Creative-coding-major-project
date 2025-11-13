@@ -1,5 +1,6 @@
 let grid;
 let colorManager;
+let bars = []; // Array to store bar references
 
 console.log('p5.js version:', p5.VERSION); // check p5.js version
 
@@ -17,8 +18,35 @@ function setup() {
     // create new grid set to 32 rows and columns to match the modified reference artwork
     grid = new LayoutGrid(32, 32, colorManager.getAllColors());
 
+    //add the bars separate from the blocks to keep them static
+    //add horizontal bars
+    bars.push(grid.addHorizontalBar(1,0,4));
+    bars.push(grid.addHorizontalBar(5,0,32));
+    bars.push(grid.addHorizontalBar(5,0,32));
+    bars.push(grid.addHorizontalBar(9,0,25));
+    bars.push(grid.addHorizontalBar(14,0,22));
+    bars.push(grid.addHorizontalBar(14,24,32));
+    bars.push(grid.addHorizontalBar(17,0,32));
+    bars.push(grid.addHorizontalBar(22,0,18));
+    bars.push(grid.addHorizontalBar(22,24,32));
+    bars.push(grid.addHorizontalBar(26,0,32));
+    bars.push(grid.addHorizontalBar(26,0,32));
+    bars.push(grid.addHorizontalBar(29,0,13));
+
+    //add vertical bars
+    bars.push(grid.addVerticalBar(3,0,32));
+    bars.push(grid.addVerticalBar(7,0,32));
+    bars.push(grid.addVerticalBar(12,0,32));
+    bars.push(grid.addVerticalBar(14,17,32));
+    bars.push(grid.addVerticalBar(18,17,32));
+    bars.push(grid.addVerticalBar(21,0,18));
+    bars.push(grid.addVerticalBar(24,5,18));
+    bars.push(grid.addVerticalBar(25,17,32));
+    bars.push(grid.addVerticalBar(27,5,13));
+
     // load the blocks
     loadBlocksFromCSV(blockData, grid);
+
 
     // Log how many blocks were loaded
     console.log(`Loaded ${grid.blocks.length} blocks total`);
@@ -42,13 +70,14 @@ function loadBlocksFromCSV(table, grid) {
   }
 }
 
-function draw() { //add bars (horizontal/ vertical) here
-    
+function draw() {
+
     // Set background color
     background(colorManager.palette.background);
 
     // display the blocks on the grid
     grid.display();
+
 }
 
 function windowResized() {
