@@ -16,7 +16,10 @@ function setup() {
     colorManager = new ColorManager();
 
     let artWorkSize = min(windowWidth, windowHeight) - 40;
-    createCanvas(artWorkSize, artWorkSize);
+
+    // Create canvas and attach canvas to specific container
+    let canvas = createCanvas(artWorkSize, artWorkSize);
+    canvas.parent('canvas-container'); // Attach to the main element
 
     // create new grid set to 32 rows and columns to match the modified reference artwork
     grid = new LayoutGrid(32, 32, colorManager.getAllColors());
@@ -54,12 +57,6 @@ function setup() {
     playPauseBtn = select('#playPauseBtn');
     playPauseBtn.mousePressed(toggleMusic);
 
-    /* To only have blocks that are size 1 row wide and 1 column tall animate,c ount 1×1 blocks that will animate
-    let smallBlocks = grid.blocks.filter(b => 
-        !b.isBar && b.rowSpan === 1 && b.colSpan === 1 // row span equal to 1 AND colum span equal to 1
-    );
-    */
-
 }
 
 // function to load blocks from a CSV table into the grid
@@ -86,7 +83,7 @@ function draw() {
     background(colorManager.palette.background);
 
     applyAudioToSmallBlocks(grid);
-    
+
     // display the blocks on the grid
     grid.display();
 

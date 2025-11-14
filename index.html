@@ -25,22 +25,37 @@
         body {
             margin: 0;
             padding: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Container for everything */
+        #container {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        /* Controls at top */
+        #controls {
+            margin-bottom: 20px;
+            z-index: 100;
         }
 
         button {
             padding: 12px 24px;
             font-size: 16px;
             background-color: #DFC324;
+            color: #000;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
             transition: background-color 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
     
         button:hover {
@@ -50,14 +65,24 @@
         button:active {
             background-color: #a89119;
         }
+
+        /* Make sure canvas stays visible */
+        main {
+            position: relative;
+        }
     </style>
 </head>
 
-
 <body>
-    <!-- Play/Pause button -->
-    <div id="controls">
-        <button id="playPauseBtn"> Play </button>
+    <div id="container">
+        <!-- Play/Pause button -->
+        <div id="controls">
+            <button id="playPauseBtn">Play</button>
+        </div>
+        
+        <!-- Canvas container -->
+        <main id="canvas-container"></main>
+    </div>
 </body>
 
 </html>

@@ -3,17 +3,14 @@ let fft;
 let amplitude;
 let isPlaying = false;
 
+
 function setupAudio() {
-
-    // Load music
-    song = loadSound('data/music.mp3');
-
-    // Create FFT analyzer for frequency analysis
-    fft = new p5.FFT(0.8, 64);
-
-    // Create amplitude analyzer for overall volume
-    amplitude = new p5.Amplitude();
-
+    song = loadSound('data/music.mp3', 
+        () => {
+            fft = new p5.FFT(0.8, 64);
+            amplitude = new p5.Amplitude();
+        }
+    );
 }
 
 // Use if/elese to toggle play/pause for music when button is clicked and update text on the button too
@@ -56,6 +53,8 @@ function applyAudioToSmallBlocks(grid) {
 
     // Apply different movements based on color using for loop to loop through all the blocks
     for (let i = 0; i < smallBlocks.length; i++) {
+        let block = smallBlocks[i];
+        let color = block.color;
 
         // // Blue 1×1 blocks: Bounce up/down with bass
         if (color === grid.colors.blue1 || color === grid.colors.blue2) {
@@ -63,7 +62,7 @@ function applyAudioToSmallBlocks(grid) {
         }
 
         // Red 1×1 blocks: Wave left/right with mid frequencies
-        else if (color === grid.colors.red1 || color === grid.colors.red2) {
+        else if (color === grid.colors.red) {
             applyWaveEffect(block, mid, i);
         }
 

@@ -7,6 +7,17 @@ class Block {
         this.rowSpan = rowSpan;
         this.colSpan = colSpan;
         this.color = color;  // Just one color variable!
+
+        this.isBar = false;
+
+        this.scaleX = 1;
+        this.scaleY = 1;
+        this.offsetX = 0;
+        this.offsetY = 0;
+
+        this.targetOffsetX = 0;
+        this.targetOffsetY = 0;
+        this.animationPhase = random(TWO_PI);
     }
 
     display(cellSize) {
@@ -29,7 +40,7 @@ class Block {
         noStroke();
 
         rectMode(CENTER);
-        rect(x, y, w, h);
+        rect(0, 0, w, h);
 
         pop(); // Restore original transformation state
      }
@@ -38,6 +49,7 @@ class Block {
 
         this.offsetX = lerp(this.offsetX, this.targetOffsetX, 0.2);
         this.offsetY = lerp(this.offsetY, this.targetOffsetY, 0.2);
+
     }
 
     resetTransform() { // when music stops
