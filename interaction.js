@@ -5,12 +5,13 @@ let isPlaying = false;
 
 
 function setupAudio() {
-    song = loadSound('data/music.mp3', 
-        () => {
-            fft = new p5.FFT(0.8, 64);
-            amplitude = new p5.Amplitude();
-        }
-    );
+    song = loadSound('data/music.mp3', musicLoaded);
+}
+
+function musicLoaded() {
+    console.log('Music loaded');
+    fft = new p5.FFT(0.8, 64);
+    amplitude = new p5.Amplitude();
 }
 
 // Use if/elese to toggle play/pause for music when button is clicked and update text on the button too
