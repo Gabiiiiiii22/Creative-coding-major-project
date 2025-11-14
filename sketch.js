@@ -1,3 +1,4 @@
+let startDelay = 1000; // 1 second delay before animation starts
 let grid;
 let colorManager;
 let blockData;
@@ -31,7 +32,16 @@ function loadBlocksFromCSV(table, grid) {
 function draw() {
     background(colorManager.palette.background);
 
-    let t = millis() / 1000;
+    let t = millis() - startDelay;  // start timing AFTER delay
+
+// If delay not finished → just show the artwork and exit draw()
+// using conditionals statements here
+if (t < 0) {
+    grid.display();  // show original art
+    return;          // stop animation until delay finishes
+}
+    
+t = t / 1000;  // convert to seconds AFTER delay is done
 
     let scatterDuration = 3;
     let pulseDuration = 5;
@@ -79,12 +89,13 @@ function draw() {
             block.scale = 1;
 
             // Fade out randomly after return is complete 
-            // Instantly disappear randomly after return
+            // disappear randomly after return but after 2 sec
             if (returnT === 1) {
-                if (random() < 0.03) {    // 3% chance each frame 
-                    block.opacity = 0;    // instantly gone
-                    // alpha transparency reference: https://p5js.org/reference/p5/alpha/
-                }
+                if (t > scatterDuration + pulseDuration + returnDuration + 2) {
+    if (random() < 0.03) {
+        block.opacity = 0;
+    }
+}
             }
         }
     }
@@ -93,3 +104,6 @@ function draw() {
     grid.display();
 }
 
+// tutorials used for reference:
+// Simple sine wave animation in p5.js: https://www.youtube.com/watch?v=ktPnruyC6cc
+// Scatter effect: generated using pseudo-random target positions inspired by random pattern: https://p5js.org/reference/p5/random/
