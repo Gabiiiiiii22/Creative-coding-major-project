@@ -20,19 +20,41 @@
 
     <style>
         body {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #DFC324;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+    
+        button:hover {
+            background-color: #c4ab1f;
+        }
+    
+        button:active {
+            background-color: #a89119;
         }
     </style>
 </head>
 
 
 <body>
+    <!-- Play/Pause button -->
+    <div id="controls">
+        <button id="playPauseBtn"> Play </button>
 </body>
 
 </html>
