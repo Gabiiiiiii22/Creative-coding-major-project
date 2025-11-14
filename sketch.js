@@ -2,6 +2,7 @@ let grid;
 let colorManager;
 let bars = []; // Array to store bar references
 let playPauseBtn; // link to the id in html
+let volumeSlider; 
 
 console.log('p5.js version:', p5.VERSION); // check p5.js version
 
@@ -57,6 +58,20 @@ function setup() {
     playPauseBtn = select('#playPauseBtn');
     playPauseBtn.mousePressed(toggleMusic);
 
+    volumeSlider = select('#volumeSlider');
+    volumeSlider.input(updateVolume);
+
+    // Set initial volume
+    updateVolume();
+
+}
+
+function updateVolume() {
+    let vol = volumeSlider.value() / 100; // Convert 0-100 to 0-1
+    song.setVolume(vol);
+    
+    // Update display text
+    select('#volumeValue').html(volumeSlider.value() + '%');
 }
 
 // function to load blocks from a CSV table into the grid

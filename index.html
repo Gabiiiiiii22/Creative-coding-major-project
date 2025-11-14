@@ -32,11 +32,11 @@
         /* Container for everything */
         #container {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 24px;
         }
 
         /* Controls at top */
@@ -66,6 +66,24 @@
             background-color: #a89119;
         }
 
+        #volume-control {
+            display: flex;
+            align-items: left;
+            gap: 10px;
+            font-family: 'Helvetica', sans-serif;
+            font-size: 14px;
+            padding: 16px;
+        }
+
+        #volumeSlider {
+            width: 150px;
+            cursor: pointer;
+        }
+
+        #volumeValue {
+            min-width: 40px;
+        }
+
         /* Make sure canvas stays visible */
         main {
             position: relative;
@@ -75,9 +93,19 @@
 
 <body>
     <div id="container">
-        <!-- Play/Pause button -->
+        
         <div id="controls">
+            
+            <!-- Play/Pause button -->
             <button id="playPauseBtn"> 🔉 Start Boogie Woogie </button>
+
+            <!-- volume slider -->
+            <div id="volume-control">
+                <label for="volumeSlider">Volume:</label>
+                <input type="range" id="volumeSlider" min="0" max="100" value="50">
+                <span id="volumeValue">50%</span>
+            </div>
+
         </div>
         
         <!-- Canvas container -->
