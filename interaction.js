@@ -58,8 +58,15 @@ function applyAudioToSmallBlocks(grid) {
         let color = block.color;
 
         // // Blue 1×1 blocks: Bounce up/down with bass
+        
         if (color === grid.colors.blue1 || color === grid.colors.blue2) {
-            applyBounceEffect(block, bass, i);
+            // Even numbered blocks (0, 2, 4...) bounce vertically
+            // Odd numbered blocks (1, 3, 5...) bounce horizontally
+            if (i % 2 === 0) {
+                applyBounceUpDown(block, bass, i); // Vertical
+            } else {
+                applyBounceLeftRight(block, bass, i);   // Horizontal
+            }
         }
 
         // Red 1×1 blocks: Wave left/right with mid frequencies
@@ -72,13 +79,24 @@ function applyAudioToSmallBlocks(grid) {
     }
 }
 
-function applyBounceEffect(block, bass, index){
+function applyBounceUpDown(block, bass, index){
     // Map bass energy to bounce distance (0-30 pixels)
     let bounceAmount = map(bass, 0, 255, 0, 30);
 
     let offset = sin(frameCount * 0.1 + index) * bounceAmount;
 
     block.targetOffsetY = -abs(offset); // upward bounce
+    block.targetOffsetX = 0; // No horizontal movement
+}
+
+function applyBounceLeftRight(block, bass, index){
+    // Map bass energy to bounce distance (0-15 pixels)
+    let bounceAmount = map(bass, 0, 255, 0, 15);
+
+    let offset = sin(frameCount * 0.1 + index) * bounceAmount;
+
+    block.targetOffsetX = offset;
+    block.targetOffsetY = 0; // No vertical movement
 }
 
 function applyWaveEffect(block, mid, index){
