@@ -81,7 +81,7 @@ function applyAudioToSmallBlocks(grid) {
 
 function applyBounceUpDown(block, bass, index){
     // Map bass energy to bounce distance (0-30 pixels)
-    let bounceAmount = map(bass, 0, 255, 0, 30);
+    let bounceAmount = map(bass, 0, 255, 0, 30); // if base 0, no bounce. If base loud (255), bouce 30 pixels
 
     let offset = sin(frameCount * 0.1 + index) * bounceAmount;
 
@@ -91,7 +91,7 @@ function applyBounceUpDown(block, bass, index){
 
 function applyBounceLeftRight(block, bass, index){
     // Map bass energy to bounce distance (0-15 pixels)
-    let bounceAmount = map(bass, 0, 255, 0, 15);
+    let bounceAmount = map(bass, 0, 255, 0, 15); // if base 0, no bounce. If base loud (255), bouce 15 pixels
 
     let offset = sin(frameCount * 0.1 + index) * bounceAmount;
 
