@@ -20,11 +20,11 @@ function toggleMusic() {
     if (song.isPlaying()) {
         song.pause();
         isPlaying = false;
-        document.getElementById('playPauseBtn').innerHTML = 'Play'; // Set text button to 'Play'
+        document.getElementById('playPauseBtn').innerHTML = '🔉 Start Boogie Woogie'; // Set text button to 'Play'
     } else {
         song.loop(); // Loop the music continuously
         isPlaying = true;
-        document.getElementById('playPauseBtn').innerHTML = 'Pause'; // Set text button to 'Pause'
+        document.getElementById('playPauseBtn').innerHTML = '🔇 Stop Boogie Woogie'; // Set text button to 'Pause'
     }
 }
 
@@ -74,11 +74,17 @@ function applyAudioToSmallBlocks(grid) {
             applyWaveEffect(block, mid, i);
         }
 
+        // Grey 1×1 blocks: Pulse with treble
+        else if (color === grid.colors.grey) {
+            applyPulseEffect(block, treble, i);
+        }
+
         // Update smooth animation using lerp
         block.update();
     }
 }
 
+// Bouce effect for blue blocks (up-down)
 function applyBounceUpDown(block, bass, index){
     // Map bass energy to bounce distance (0-30 pixels)
     let bounceAmount = map(bass, 0, 255, 0, 30); // if base 0, no bounce. If base loud (255), bouce 30 pixels
@@ -89,6 +95,7 @@ function applyBounceUpDown(block, bass, index){
     block.targetOffsetX = 0; // No horizontal movement
 }
 
+// Bouce effect for blue blocks (left-right)
 function applyBounceLeftRight(block, bass, index){
     // Map bass energy to bounce distance (0-15 pixels)
     let bounceAmount = map(bass, 0, 255, 0, 15); // if base 0, no bounce. If base loud (255), bouce 15 pixels
@@ -99,6 +106,7 @@ function applyBounceLeftRight(block, bass, index){
     block.targetOffsetY = 0; // No vertical movement
 }
 
+// Wave effect for red blocks
 function applyWaveEffect(block, mid, index){
     // Map mid energy to wave distance (0-20 pixels)
     let waveAmount = map(mid, 0, 255, 0, 20);
@@ -108,3 +116,13 @@ function applyWaveEffect(block, mid, index){
     block.targetOffsetX = offset;
 }
 
+// Pulse effect for grey blocks
+function applyPulseEffect(block, treble, index) {
+    let pulseAmount = map(treble, 0, 255, 1, 1.3);
+    let scale = 1 + sin(frameCount * 0.1 + index) * (pulseAmount - 1);
+    
+    block.scaleX = scale;
+    block.scaleY = scale;
+    block.targetOffsetX = 0;
+    block.targetOffsetY = 0;
+}
