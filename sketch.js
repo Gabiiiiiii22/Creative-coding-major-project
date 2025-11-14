@@ -1,12 +1,15 @@
 let grid;
 let colorManager;
 let bars = []; // Array to store bar references
+let playPauseBtn; // link to the id in html
 
 console.log('p5.js version:', p5.VERSION); // check p5.js version
 
 function preload() {
     //put the csv files here :))))
     blockData = loadTable('data/blocks.csv', 'csv', 'header');
+
+    setupAudio();
 }
 
 function setup() {
@@ -47,9 +50,16 @@ function setup() {
     // load the blocks
     loadBlocksFromCSV(blockData, grid);
 
+    // Setup play/pause button
+    playPauseBtn = select('#playPauseBtn');
+    playPauseBtn.mousePressed(toggleMusic);
 
-    // Log how many blocks were loaded
-    console.log(`Loaded ${grid.blocks.length} blocks total`);
+    /* To only have blocks that are size 1 row wide and 1 column tall animate,c ount 1×1 blocks that will animate
+    let smallBlocks = grid.blocks.filter(b => 
+        !b.isBar && b.rowSpan === 1 && b.colSpan === 1 // row span equal to 1 AND colum span equal to 1
+    );
+    */
+
 }
 
 // function to load blocks from a CSV table into the grid
@@ -75,6 +85,8 @@ function draw() {
     // Set background color
     background(colorManager.palette.background);
 
+    applyAudioToSmallBlocks(grid);
+    
     // display the blocks on the grid
     grid.display();
 
