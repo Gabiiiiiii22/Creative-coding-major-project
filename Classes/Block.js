@@ -9,7 +9,7 @@ class Block {
         this.color = color;  // Base color for this block
     }
 
-  
+  // p5js idle theory
     display(cellSize, mode = 'idle', activeCol = -1) {
       
         let x = this.col * cellSize; 
