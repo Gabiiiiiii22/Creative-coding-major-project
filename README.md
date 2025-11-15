@@ -1,127 +1,82 @@
-# Boogie Woogie – Interactive Individual Animation (INPUT)
+# Boogie Woogie – Interactive Individual Animation (INPUT-INTERACTION)
 
+## Interactions
 
-## How to interact with the
+**Mouse movement**
+- Slowly move your mouse across the canvas.
+- Blocks near the cursor *brighten and glow*, as if lights in the city are responding to your presence.
+- The closer the mouse is to a block, the stronger the highlight.
 
+**Keyboard**
+- Press **`T`** to toggle the **train animation**:
+- A vertical column moves from left to right across the artwork.
+- Blocks in the active column are overlaid with a warm red tint, suggesting a train of light travelling across the city grid.
+- Press **`T`** again to return to this mode.
 
-### Interactions
+## My individual approach to animate base on group code
 
-Once the page is loaded, the animation responds as follows:
-
-- **Mouse movement**
-  - Slowly move your mouse across the canvas.
-  - Blocks near the cursor *brighten and glow*, as if lights in the city are responding to your presence.
-  - The closer the mouse is to a block, the stronger the highlight.
-
-- **Keyboard**
-  - Press **`T`** to toggle the **color gardient animation**:
-    - A vertical column moves from left to right across the artwork.
-    - Blocks in the active column are overlaid with a warm red tint, suggesting a train of light travelling across the city grid.
-  - Press **`T`** again to return to the idle mode.
-
-The composition remains recognisably Mondrian-inspired, but the **temporal rhythm and visual emphasis** now depend on how the viewer moves and which keys they press.
-
----
-
-## 2. My individual approach to animating the group code
-
-Our group agreed on a shared base: a Mondrian-like reinterpretation of **Sydney’s street and train network**, constructed from a 32×32 grid and loaded from a `blocks.csv` file via p5.js. Each block’s row, column, span, and colour are defined there, and the original group code rendered a static artwork.
+Our group agreed on a shared base: a Mondrian-like reinterpretation of **Sydney’s street and network**, constructed from a 32×32 grid and loaded from a **blocks.csv** file. Each block’s row, column, span and colour defined there and the original group code rendered a static artwork.
 
 For my individual version, I focused on **interaction** as the driver of animation:
 
 - I treat the viewer’s **mouse** as a moving source of energy that “wakes up” nearby blocks through brightness and subtle colour shifts.
 - I use a **keyboard-triggered mode** (`T` key) to simulate a symbolic **train line** that moves across the grid, aligning with our reference to Sydney’s transport network.
 
-Conceptually, my animation explores how **urban light and motion are co-created by people’s movement and by infrastructure**. Instead of adding random or time-only changes, I wanted the animation to feel like a live, responsive city.
+Conceptually, my animation explores how **urban light and motion are co-created by people’s movement and by infrastructure**. Instead of adding random or time-only changes, I wanted the animation to feel like a live, responsive city. 
 
----
-
-## 3. Animation driver: interaction (mouse + keyboard)
-
-The brief asked us to choose one main driver from: **audio, interaction, Perlin noise, or time**.
-
-- I chose **interaction** as my primary driver:
-  - **Mouse input** creates a continuous field of influence: the viewer’s position directly controls which blocks are emphasised at any moment.
-  - **Keyboard input** (the `T` key) switches between a calm, reactive city and a more explicit, rhythmic “train sweep” that moves across the composition.
-
-Time is still present (the train progresses over frames), but without user input the animation remains minimal. The focus is deliberately on **direct interaction**.
-
----
-
-## 4. Animated properties and how they differ from my group members
+## Animated properties and how they diffrent from my group members
 
 In my individual version, I animate the following properties:
 
-1. **Local brightness / glow**
-   - Each block calculates its distance to the mouse.
-   - Within a certain radius, the block’s colour is blended towards white, creating a **proximity-based glow**.
-   - This makes the grid feel like it is breathing with the viewer’s movement.
+**Local brightness / glow**
+- Each block calculates its distance to the mouse.
+- Within a certain radius, the block’s colour is blended towards white, creating a **proximity-based glow**.
+- This makes the grid feel like it is breathing with the viewer’s movement.
 
-2. **Colour accent along a moving column (train mode)**
-   - When train mode is active, a column index advances over time.
-   - Blocks overlapping this column are blended toward a **warm red highlight**, suggesting a train of illuminated windows passing through the city.
+**Colour accent along a moving column**
+- When train mode is active, a column index advances over time.
+- Blocks overlapping this column are blended toward a **warm red highlight**, suggesting a train of illuminated windows passing through the city.
 
 In our group, we discussed ensuring that each member’s animation was distinct. While others considered:
 
-- Changing only **hue / palette** over time,
-- Adjusting **block size or layout emphasis**, or
-- Revealing **subsets of components** step by step,
+- **Rutwijia**:used scatter,pulse and disappear time to animate
+- **Sawita**:used sound to move blocks
+- **Gina**:plan to do the dynamic by randomly changing the size and colors using noise function
 
-my emphasis is on:
+My emphasis is on:
 
-- **Proximity-based glow** controlled by mouse movement; and  
-- A **column-based “train” sweep** triggered by the keyboard.
+- **Proximity-based glow**:controlled by mouse movement.
+- **column-based “train” sweep**:triggered by the keyboard.
 
-This combination of **spatial interaction** (mouse) and **mode switching** (keyboard) makes my version visually and behaviourally distinct from team-mates who may focus on different visual properties or drivers.
+This combination of **spatial interaction** (mouse) and **mode switching** (keyboard) makes my version visually and distinct from team-mates who may focus on different visual properties or drivers.
 
----
+## Technical explanation of how the animation works
 
-## 5. Inspirations and references
-
-My animation is informed by:
-
-- **Piet Mondrian’s *Broadway Boogie Woogie***  
-  The original painting suggests rhythm, movement, and music through its grid of coloured blocks. I was inspired by how a static composition can still imply motion and tempo.
-
-- **Sydney and global metro/rail maps**  
-  The vertical and horizontal blocks echo train lines and city blocks. The moving column of light is a simplified, abstract representation of a train travelling across a network.
-
-- **Interactive light installations & data visualisations**  
-  Many contemporary works (such as interactive façades or digital city maps) brighten or pulse in response to viewer presence or live data. I translated that idea into a **distance-based glow** around the cursor.
-
-These references influenced my decision to keep the layout itself fixed (respecting the group’s composition) while using **light, colour, and interaction** to bring it to life.
-
----
-
-## 6. Technical explanation of how the animation works
-
-### 6.1 Base architecture (shared with group)
+### Base code
 
 - The sketch uses **p5.js** and loads `data/blocks.csv` in `preload()`.
 - `LayoutGrid` creates a 32×32 grid and stores all `Block` objects. :contentReference[oaicite:4]{index=4}  
 - Each `Block` holds its grid position, span, and base colour, and is responsible for drawing itself. :contentReference[oaicite:5]{index=5}  
 - On each `draw()` frame, the grid loops through every block and calls `block.display()` to render the artwork. :contentReference[oaicite:6]{index=6}  
 
-### 6.2 Mouse-based glow
+### Mouse-based glow
 
 In my modified `Block.display()` method:
 
-1. I compute the block’s **pixel coordinates** (`x`, `y`, `w`, `h`) from its row/column and the current `cellSize`.
-2. I calculate the **distance `d` from the mouse** to the block’s centre.
-3. If `d` is within a certain radius, I derive a value `t` from `0` to `1` (closer = larger `t`).
-4. I blend (`lerpColor`) the block’s base colour towards white using `t`, creating a **smooth falloff**:
-   - Far from the mouse → near the original colour  
-   - Close to the mouse → close to white / glowing
+- I compute the block’s **pixel coordinates** (x, y, w, h) from its row/column and the current `cellSize`.
+- I calculate the **distance `d` from the mouse** to the block’s centre.
+- If `d` is within a certain radius, I derive a value `t` from `0` to `1` (closer = larger `t`).
+- I blend (`lerpColor`) the block’s base colour towards white using `t`, creating a **smooth falloff**:
+   - Far from the mouse: show near the original colour  
+   - Close to the mouse: show close to white / glowing
 
-This produces a dynamic, continuous halo of brighter blocks that follows the cursor across the grid.
-
-### 6.3 Keyboard-triggered train animation
+### Keyboard-triggered train animation
 
 In `sketch.js`:
 
 - I store a global `animationMode` (`'idle'` or `'train'`) and a `trainProgress` value.
 - In `keyPressed()`, pressing **`T`** toggles `animationMode`:
-  - When entering `'train'`, `trainProgress` is reset.
+- When entering `'train'`, `trainProgress` is reset.
 - In each `draw()` frame, if `animationMode === 'train'`:
   - `trainProgress` is increased slightly,
   - the **active column index** is computed as `floor(trainProgress) % grid.cols`,
@@ -134,7 +89,7 @@ In `Block.display()`, the block checks:
 
 This yields a **moving vertical band** that interacts with the underlying composition and with the mouse glow.
 
----
+
 
 ## 7. Changes I made to the group code
 
@@ -154,7 +109,20 @@ Compared to the original group code, I:
 
 The CSV data structure, color palette, and core grid logic remain consistent with the group’s shared foundation.
 
----
+## 5. Inspirations and references
+
+My animation is informed by:
+
+- **Piet Mondrian’s *Broadway Boogie Woogie***  
+  The original painting suggests rhythm, movement, and music through its grid of coloured blocks. I was inspired by how a static composition can still imply motion and tempo.
+
+- **Sydney and global metro/rail maps**  
+  The vertical and horizontal blocks echo train lines and city blocks. The moving column of light is a simplified, abstract representation of a train travelling across a network.
+
+- **Interactive light installations & data visualisations**  
+  Many contemporary works (such as interactive façades or digital city maps) brighten or pulse in response to viewer presence or live data. I translated that idea into a **distance-based glow** around the cursor.
+
+These references influenced my decision to keep the layout itself fixed (respecting the group’s composition) while using **light, colour, and interaction** to bring it to life.
 
 ## 8. External tools and techniques
 
