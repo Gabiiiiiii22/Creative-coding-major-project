@@ -2,8 +2,8 @@
 
 # **Sydney Boogie Woogie (Individual Animation)**
 
-*(Rutwija Pawar)*
-*(Unit: IDEA9106 / Interaction Design Coding)*
+*(Rutwija Pawar - rpaw0280)*
+*(Unit: IDEA9103 / Creative Coding)*
 
 ---
 
