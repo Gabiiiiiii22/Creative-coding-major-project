@@ -113,16 +113,22 @@ My animation is informed by:
 **Piet Mondrian’s *Broadway Boogie Woogie***  
 The original painting suggests rhythm, movement, and music through its grid of coloured blocks. I was inspired by how a static composition can still imply motion and tempo.
 
-**Sydney and global metro/rail maps**  
+![Piet_Mondrian Broadway_Boogie_Woogie](https://github.com/user-attachments/assets/16990ae7-5b40-4c9a-a337-4fffdcc1bc47)
+
+
+**Sydney and global metro and railway maps**  
 The vertical and horizontal blocks echo train lines and city blocks. The moving column of light is a simplified, abstract representation of a train travelling across a network.
 
-**Interactive light installations & data visualisations**  
-Many contemporary works (such as interactive façades or digital city maps) brighten or pulse in response to viewer presence or live data. I translated that idea into a **distance-based glow** around the cursor.
+<img width="1194" height="844" alt="image" src="https://github.com/user-attachments/assets/02b0b2d3-5326-4a1e-92c4-f0788642ab5d" />
 
-These references influenced my decision to keep the layout itself fixed (respecting the group’s composition) while using **light, colour, and interaction** to bring it to life.
+**Forest of Resonating Lamp** 
+Inspired by teamLab’s Forest of Resonating Lamps, where light ripples outward as viewers move.
+
+<img width="1920" height="1279" alt="image" src="https://github.com/user-attachments/assets/4f847c52-5267-4458-84bb-d642c6bef9d6" />
+
 
 ## External tools and techniques
 
-- The project uses **p5.js** (as required by the course).
-- The interaction patterns (mouse-driven distance, keyboard toggles) are built using standard p5.js functions such as `dist()`, `lerpColor()`, `keyPressed()`, and global mouse variables.
+- The project uses **p5.js** reference.
+- The interaction patterns (mouse-driven distance, keyboard toggles) built using standard p5.js functions such as `dist()`, `lerpColor()`, `keyPressed()`, and global mouse variables.
 - The idea of using **distance-based colour interpolation** is a common technique in generative art and interactive visualisation, adapted here specifically to fit our Mondrian-inspired, Sydney-based composition.
