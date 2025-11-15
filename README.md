@@ -55,9 +55,8 @@ This combination of **spatial interaction** (mouse) and **mode switching** (keyb
 ### Base code
 
 - The sketch uses **p5.js** and loads `data/blocks.csv` in `preload()`.
-- `LayoutGrid` creates a 32×32 grid and stores all `Block` objects. :contentReference[oaicite:4]{index=4}  
-- Each `Block` holds its grid position, span, and base colour, and is responsible for drawing itself. :contentReference[oaicite:5]{index=5}  
-- On each `draw()` frame, the grid loops through every block and calls `block.display()` to render the artwork. :contentReference[oaicite:6]{index=6}  
+- `LayoutGrid` creates a 32×32 grid and stores all `Block` objects.
+- Each `Block` holds its grid position, span, and base colour, and is responsible for drawing itself. 
 
 ### Mouse-based glow
 
@@ -89,47 +88,41 @@ In `Block.display()`, the block checks:
 
 This yields a **moving vertical band** that interacts with the underlying composition and with the mouse glow.
 
-
-
-## 7. Changes I made to the group code
+## Changes I made to the group code
 
 Compared to the original group code, I:
 
-1. **Extended the Block class**
-   - Added extra parameters to `display(cellSize, mode, activeCol)` to support animation.
-   - Implemented distance-based brightness changes and train-column highlighting.
+**Extended the Block class**
+- Added extra parameters to `display(cellSize, mode, activeCol)` to support animation.
+- Implemented distance-based brightness changes and train-column highlighting.
 
-2. **Updated LayoutGrid.display()**
-   - Now forwards `mode` and `activeCol` to each block to coordinate the animation across the entire grid.
+**Updated LayoutGrid.display()**
+- Now forwards `mode` and `activeCol` to each block to coordinate the animation across the entire grid.
 
-3. **Added animation state to sketch.js**
-   - Global variables: `animationMode` and `trainProgress`.
-   - Modified `draw()` to compute the active column when in train mode.
-   - Added a `keyPressed()` function to toggle modes with the `T` key.
+**Added animation state to sketch.js**
+- Global variables: `animationMode` and `trainProgress`.
+- Modified `draw()` to compute the active column when in train mode.
+- Added a `keyPressed()` function to toggle modes with the `T` key.
 
 The CSV data structure, color palette, and core grid logic remain consistent with the group’s shared foundation.
 
-## 5. Inspirations and references
+## Inspirations and references
 
 My animation is informed by:
 
-- **Piet Mondrian’s *Broadway Boogie Woogie***  
-  The original painting suggests rhythm, movement, and music through its grid of coloured blocks. I was inspired by how a static composition can still imply motion and tempo.
+**Piet Mondrian’s *Broadway Boogie Woogie***  
+The original painting suggests rhythm, movement, and music through its grid of coloured blocks. I was inspired by how a static composition can still imply motion and tempo.
 
-- **Sydney and global metro/rail maps**  
-  The vertical and horizontal blocks echo train lines and city blocks. The moving column of light is a simplified, abstract representation of a train travelling across a network.
+**Sydney and global metro/rail maps**  
+The vertical and horizontal blocks echo train lines and city blocks. The moving column of light is a simplified, abstract representation of a train travelling across a network.
 
-- **Interactive light installations & data visualisations**  
-  Many contemporary works (such as interactive façades or digital city maps) brighten or pulse in response to viewer presence or live data. I translated that idea into a **distance-based glow** around the cursor.
+**Interactive light installations & data visualisations**  
+Many contemporary works (such as interactive façades or digital city maps) brighten or pulse in response to viewer presence or live data. I translated that idea into a **distance-based glow** around the cursor.
 
 These references influenced my decision to keep the layout itself fixed (respecting the group’s composition) while using **light, colour, and interaction** to bring it to life.
 
-## 8. External tools and techniques
+## External tools and techniques
 
 - The project uses **p5.js** (as required by the course).
 - The interaction patterns (mouse-driven distance, keyboard toggles) are built using standard p5.js functions such as `dist()`, `lerpColor()`, `keyPressed()`, and global mouse variables.
 - The idea of using **distance-based colour interpolation** is a common technique in generative art and interactive visualisation, adapted here specifically to fit our Mondrian-inspired, Sydney-based composition.
-
-No external libraries beyond p5.js are used in this individual version. Any conceptual inspirations (light installations, train networks, Mondrian’s work) are reflected through my own implementation and not copied as code.
-
----
