@@ -1,56 +1,64 @@
 let grid;
 let colorManager;
-
-console.log('p5.js version:', p5.VERSION); // check p5.js version
+let blockData;
+let animationMode = 'idle'; 
+let trainProgress = 0;     
+console.log('p5.js version:', p5.VERSION); 
 
 function preload() {
-    //put the csv files here :))))
+   
     blockData = loadTable('data/blocks.csv', 'csv', 'header');
 }
 
 function setup() {
     colorManager = new ColorManager();
-
     let artWorkSize = min(windowWidth, windowHeight) - 40;
     createCanvas(artWorkSize, artWorkSize);
-
-    // create new grid set to 32 rows and columns to match the modified reference artwork
     grid = new LayoutGrid(32, 32, colorManager.getAllColors());
-
-    // load the blocks
     loadBlocksFromCSV(blockData, grid);
-
-    // Log how many blocks were loaded
     console.log(`Loaded ${grid.blocks.length} blocks total`);
 }
 
-// function to load blocks from a CSV table into the grid
 function loadBlocksFromCSV(table, grid) {
-  
-    // Loop through each row in the CSV
+    
     for (let i = 0; i < table.getRowCount(); i++) {
 
-        // Read values from CSV columns
         let row = table.getNum(i, 'Row');
         let col = table.getNum(i, 'Col');
         let rowSpan = table.getNum(i, 'RowSpan');
         let colSpan = table.getNum(i, 'ColSpan');
         let color = table.getString(i, 'Color');
-    
-    // Add block to grid
-    grid.addBlock(row, col, rowSpan, colSpan, color);
-  }
+
+        grid.addBlock(row, col, rowSpan, colSpan, color);
+    }
 }
 
-function draw() { //add bars (horizontal/ vertical) here
+function draw() {
     
-    // Set background color
     background(colorManager.palette.background);
+    let activeCol = -1;
+    if (animationMode === 'train') {
+        
+        trainProgress += 0.05;
+        activeCol = floor(trainProgress) % grid.cols;
+    }
 
-    // display the blocks on the grid
-    grid.display();
+   
+    grid.display(animationMode, activeCol);
+}
+
+function keyPressed() {
+ 
+    if (key === 't' || key === 'T') {
+        if (animationMode === 'train') {
+            animationMode = 'idle';
+        } else {
+            animationMode = 'train';
+            trainProgress = 0; 
+        }
+    }
 }
 
 function windowResized() {
-  grid.handleResize();
+    grid.handleResize();
 }
