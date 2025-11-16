@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sydney Boogie Woogie</title>
 
+    <!-- link to the CSS file -->
+    <link rel="stylesheet" href="style.css">
+
     <!-- p5.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
     <!-- p5.sound for audio -->
@@ -22,73 +25,9 @@
     <script src="sketch.js"></script>
 
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-            font-family:'Helvetica', sans-serif;
-        }
-
-        /* Container for everything */
-        #container {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 24px;
-        }
-
-        /* Controls at top */
-        #controls {
-            margin-bottom: 20px;
-            z-index: 100;
-        }
-
-        button {
-            padding: 12px 24px;
-            font-size: 16px;
-            background-color: #DFC324;
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-    
-        button:hover {
-            background-color: #0351A0;
-            color: #E8E8E1;
-        }
-    
-        button:active {
-            background-color: #a89119;
-        }
-
-        #volume-control {
-            display: flex;
-            align-items: left;
-            gap: 10px;
-            font-family: 'Helvetica', sans-serif;
-            font-size: 14px;
-            padding: 16px;
-        }
-
-        #volumeSlider {
-            width: 150px;
-            cursor: pointer;
-        }
-
-        #volumeValue {
-            min-width: 40px;
-        }
-
-        /* Make sure canvas stays visible */
-        main {
-            position: relative;
-        }
+        
     </style>
+    
 </head>
 
 <body>
