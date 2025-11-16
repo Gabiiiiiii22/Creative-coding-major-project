@@ -71,12 +71,12 @@ function applyAudioToSmallBlocks(grid) {
 
         // Red 1×1 blocks: Wave left/right with mid frequencies
         else if (color === grid.colors.red) {
-            applyWaveEffect(block, mid, i);
+            applyPulseEffect(block, mid, i);
         }
 
         // Grey 1×1 blocks: Pulse with treble
         else if (color === grid.colors.grey) {
-            applyPulseEffect(block, treble, i);
+            applyWaveEffect(block, treble, i);
         }
 
         // Update smooth animation using lerp
@@ -106,17 +106,17 @@ function applyBounceLeftRight(block, bass, index){
     block.targetOffsetY = 0; // No vertical movement
 }
 
-// Wave effect for red blocks
+// Wave effect for grey blocks
 function applyWaveEffect(block, mid, index){
     // Map mid energy to wave distance (0-20 pixels)
     let waveAmount = map(mid, 0, 255, 0, 20);
 
-    let offset = sin(frameCount * 0.08 + index * 0.5) * waveAmount;
+    let offset = sin(frameCount * 0.1 + index) * waveAmount;
 
     block.targetOffsetX = offset;
 }
 
-// Pulse effect for grey blocks
+// Pulse effect for red blocks
 function applyPulseEffect(block, treble, index) {
     let pulseAmount = map(treble, 0, 255, 1, 1.3);
     let scale = 1 + sin(frameCount * 0.1 + index) * (pulseAmount - 1);
