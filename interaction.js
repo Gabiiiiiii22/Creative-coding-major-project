@@ -48,7 +48,7 @@ function applyAudioToSmallBlocks(grid) {
     let treble = fft.getEnergy("treble");
 
     // Get all 1×1 blocks
-    let smallBlocks = grid.blocks.filter(b =>
+    let smallBlocks = grid.blocks.filter(b => // use filter function from p5.js to filter the blocks base on the conditions I want
         !b.isBar && b.rowSpan === 1 && b.colSpan === 1 // is not a bar AND 1 row wide AND 1 column wide
     ); 
 
@@ -89,7 +89,7 @@ function applyBounceUpDown(block, bass, index){
     // Map bass energy to bounce distance (0-30 pixels)
     let bounceAmount = map(bass, 0, 255, 0, 30); // if base 0, no bounce. If base loud (255), bouce 30 pixels
 
-    let offset = sin(frameCount * 0.1 + index) * bounceAmount;
+    let offset = sin(frameCount * 0.17 + index) * bounceAmount;
 
     block.targetOffsetY = -abs(offset); // upward bounce
     block.targetOffsetX = 0; // No horizontal movement
