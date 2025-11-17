@@ -81,3 +81,8 @@ const Z_SPEED = 0.05;      // Flowing speed
 - **Function:** [p5.js noise() Reference](https://p5js.org/reference/#/p5/noise)  
 - **External Inspiration:** Gorilla Sun (2023) – *Perlin Noise Surface Textures and Scrolling Tricks*  
 
+## AI Acknowledgement
+
+I used ChatGPT (GPT-5) to help me debug and improve my code.  
+It helped me fix small errors (like color bugs and parameter issues), explain why some parts didn’t work, and suggest how to make the animation smoother using noise functions.  
+I also used it to get feedback on code comments and README formatting. 
