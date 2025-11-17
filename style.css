@@ -1,67 +1,153 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #f0edd4;
     font-family:'Helvetica', sans-serif;
+    overflow: hidden; /* Don't allow scrolling */
 }
 
 /* Container for everything */
 #container {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-    min-height: 100vh;
-    padding: 24px;
+    height: 100vh; /* make height Exactly viewport height */
+    padding: 20px 20px 170px 20px;
 }
 
-/* Controls at top */
-#controls {
-    margin-bottom: 20px;
-    z-index: 100;
-}
-
-button {
-    padding: 12px 24px;
-    font-size: 16px;
-    background-color: #DFC324;
-    color: #000;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-    
-button:hover {
-    background-color: #0351A0;
-    color: #E8E8E1;
-}
-    
-button:active {
-    background-color: #a89119;
+main {
+    position: relative;
+    flex-shrink: 0; /* Don't shrink canvas */
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 #volume-control {
+    position: fixed;
+    bottom: 100px;
+    left: -80px;
     display: flex;
-    align-items: left;
-    gap: 10px;
-    font-family: 'Helvetica', sans-serif;
-    font-size: 14px;
-    padding: 16px;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #333;
+    font-weight: 600;
+    z-index: 102;
+    pointer-events: auto;
 }
 
 #volumeSlider {
-    width: 150px;
+    width: 80px; /* This becomes the height after rotation */
+    height: 8px; /* This becomes the width after rotation */
+    transform: rotate(-90deg); /* Rotate to vertical */
     cursor: pointer;
+    margin: 36px 0; /* Space for the rotated slider */
+    background: #c0c0c0;
+    border-radius: 2px;
+    outline: none;
+    pointer-events: auto;
+    accent-color: #3c3c3b;
 }
 
 #volumeValue {
-    min-width: 40px;
+    font-size: 14px;
+    color: #20201f;
+    min-width: 30px;
+    text-align: center;
 }
 
-/* Make sure canvas stays visible */
-main {
-    position: relative;
+#turntable {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    pointer-events: none;
+    z-index: 100
 }
+
+#turntable-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 30px;
+    transform: translateY(50%);
+}
+
+#turntable-base {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#vinyl {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    pointer-events: none;
+    transition: transform 0.3s ease;
+}
+
+#vinyl.spinning {
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+#tonearm-container {
+    position: absolute;
+    top: -30px;
+    right: -40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+}
+
+#tonearm-container:hover {
+    transform: scale(1.05);
+}
+
+#play-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: #171717;
+    margin-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+#tonearm-container:hover #play-text {
+    color: #013577;
+}
+
+
+#tonearm {
+    width: 80px;
+    height: auto;
+    transform-origin: bottom left;
+    transition: transform 0.5s ease;
+}
+
+#tonearm.playing {
+    transform: rotate(-7deg) translateY(30px);
+
+}
+
 

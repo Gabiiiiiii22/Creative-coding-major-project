@@ -17,14 +17,27 @@ function musicLoaded() {
 // Use if/elese to toggle play/pause for music when button is clicked and update text on the button too
 function toggleMusic() {
 
+    // get the elements
+    let vinyl = select('#vinyl');
+    let tonearm = select('#tonearm');
+    let playText = select('#play-text');
+
     if (song.isPlaying()) {
         song.pause();
         isPlaying = false;
-        document.getElementById('playPauseBtn').innerHTML = '🔉 Start Boogie Woogie'; // Set text button to 'Play'
+
+        vinyl.removeClass('spinning'); // Stop animation
+        tonearm.removeClass('playing');
+        playText.html('Click to Play'); //Change text
+
+
     } else {
         song.loop(); // Loop the music continuously
         isPlaying = true;
-        document.getElementById('playPauseBtn').innerHTML = '🔇 Stop Boogie Woogie'; // Set text button to 'Pause'
+
+        vinyl.addClass('spinning'); // Start animation
+        tonearm.addClass('playing');
+        playText.html('Click to Stop');
     }
 }
 

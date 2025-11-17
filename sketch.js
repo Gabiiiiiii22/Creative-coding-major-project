@@ -1,7 +1,6 @@
 let grid;
 let colorManager;
 let bars = []; // Array to store bar references
-let playPauseBtn; // link to the id in html
 let volumeSlider; 
 
 console.log('p5.js version:', p5.VERSION); // check p5.js version
@@ -16,7 +15,7 @@ function preload() {
 function setup() {
     colorManager = new ColorManager();
 
-    let artWorkSize = min(windowWidth, windowHeight) - 40;
+    let artWorkSize = calculateCanvasSize();
 
     // Create canvas and attach canvas to specific container
     let canvas = createCanvas(artWorkSize, artWorkSize);
@@ -53,17 +52,39 @@ function setup() {
 
     // load the blocks
     loadBlocksFromCSV(blockData, grid);
-
-    // Setup play/pause button
-    playPauseBtn = select('#playPauseBtn');
-    playPauseBtn.mousePressed(toggleMusic);
-
+    
     volumeSlider = select('#volumeSlider');
     volumeSlider.input(updateVolume);
+
+    let tonearmContainer = select('#tonearm-container');
+    tonearmContainer.mousePressed(toggleMusic);
 
     // Set initial volume
     updateVolume();
 
+}
+
+function calculateCanvasSize() {
+    
+    // Turntable elements heights
+    let turntableVisibleHeight = 150;
+    let padding = 40;
+    
+    
+    // Available space for canvas
+    let availableHeight = windowHeight - turntableVisibleHeight - padding;
+    let availableWidth = windowWidth - 40;
+    
+    // Use smaller dimension to keep it square
+    let size = min(availableWidth, availableHeight);
+    
+    // Add constraints
+    size = max(200, size);   // Minimum 200px
+    size = min(900, size);   // Maximum 800px
+
+    console.log('Canvas size:', size, '| Window:', windowWidth, 'x', windowHeight);
+
+    return size;
 }
 
 function updateVolume() {
@@ -105,5 +126,9 @@ function draw() {
 }
 
 function windowResized() {
-  grid.handleResize();
+
+    let artWorkSize = calculateCanvasSize();
+    resizeCanvas(artWorkSize, artWorkSize);
+    grid.handleResize();
+
 }
