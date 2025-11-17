@@ -1,56 +1,71 @@
+// For animation and grain control
+let zoff = 0;
+const Z_SPEED = 0.05;  // Controls how fast time moves forward
+
+// Grain texture parameters
+// These values control how rough or smooth each block looks
+const PIX = 2;             // Pixel size for texture tiles
+const GRAIN_REZ = 0.08;    // Noise frequency
+const GRAIN_BINS = 6;      // Number of noise levels
+const GRAIN_CONTRAST = 24; // Brightness difference between pixels
+const GRAIN_TIME = 0.0;    // If >0, texture will slowly move
+let   GRAIN_SEED = 0;      // Random seed to make each run unique
+
 let grid;
 let colorManager;
+let blockData;
 
-console.log('p5.js version:', p5.VERSION); // check p5.js version
+console.log('p5.js version:', p5.VERSION);
 
 function preload() {
-    //put the csv files here :))))
-    blockData = loadTable('data/blocks.csv', 'csv', 'header');
+  // Load the CSV file that defines block positions and colors
+  blockData = loadTable('data/blocks.csv', 'csv', 'header');
 }
 
 function setup() {
-    colorManager = new ColorManager();
+  colorManager = new ColorManager();
 
-    let artWorkSize = min(windowWidth, windowHeight) - 40;
-    createCanvas(artWorkSize, artWorkSize);
+  // Use the smaller side of the window to keep artwork square
+  const artWorkSize = min(windowWidth, windowHeight) - 40;
+  createCanvas(artWorkSize, artWorkSize);
 
-    // create new grid set to 32 rows and columns to match the modified reference artwork
-    grid = new LayoutGrid(32, 32, colorManager.getAllColors());
+  // Create a 32x32 grid
+  grid = new LayoutGrid(32, 32, colorManager.getAllColors());
 
-    // load the blocks
-    loadBlocksFromCSV(blockData, grid);
+  // Load all blocks from the CSV file into the grid
+  loadBlocksFromCSV(blockData, grid);
+  console.log(`Loaded ${grid.blocks.length} blocks total`);
 
-    // Log how many blocks were loaded
-    console.log(`Loaded ${grid.blocks.length} blocks total`);
+  // Random seed so the texture pattern changes each reload
+  GRAIN_SEED = random(1000);
+
+  rectMode(CORNER);
 }
 
-// function to load blocks from a CSV table into the grid
 function loadBlocksFromCSV(table, grid) {
-  
-    // Loop through each row in the CSV
-    for (let i = 0; i < table.getRowCount(); i++) {
-
-        // Read values from CSV columns
-        let row = table.getNum(i, 'Row');
-        let col = table.getNum(i, 'Col');
-        let rowSpan = table.getNum(i, 'RowSpan');
-        let colSpan = table.getNum(i, 'ColSpan');
-        let color = table.getString(i, 'Color');
-    
-    // Add block to grid
+  // Read each row from the CSV and add a Block object
+  for (let i = 0; i < table.getRowCount(); i++) {
+    const row     = table.getNum(i, 'Row');
+    const col     = table.getNum(i, 'Col');
+    const rowSpan = table.getNum(i, 'RowSpan');
+    const colSpan = table.getNum(i, 'ColSpan');
+    const color   = table.getString(i, 'Color');
     grid.addBlock(row, col, rowSpan, colSpan, color);
   }
 }
 
-function draw() { //add bars (horizontal/ vertical) here
-    
-    // Set background color
-    background(colorManager.palette.background);
+function draw() {
+  // Keep the same background color as original artwork
+  background(colorManager.palette.background);
 
-    // display the blocks on the grid
-    grid.display();
+  // Draw the entire grid (each block now has texture)
+  grid.display(zoff);
+
+  // Move time forward for subtle animation
+  zoff += Z_SPEED;
 }
 
 function windowResized() {
+  // Recalculate cell size and canvas if window changes
   grid.handleResize();
 }
