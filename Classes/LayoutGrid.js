@@ -9,6 +9,7 @@
 
     // Method to calculate how big each grid cell will be based on the window size
     updateCellSize() {
+        // Divide canvas width by number of columns
         this.cellSize = width / this.cols;
         this.canvasSize = width;
     }
@@ -40,7 +41,6 @@
         return bar;
     }
     
-
     display() {
         for (let block of this.blocks) {
          block.display(this.cellSize);
@@ -48,7 +48,7 @@
     }
 
     getCanvasSize() {
-         return this.canvasSize; //// Output whatever the current size is)
+         return this.canvasSize; //// Output whatever the current size is
     }
 
     handleResize() { // to call in sketch.js and update cell size base on the new canvas size

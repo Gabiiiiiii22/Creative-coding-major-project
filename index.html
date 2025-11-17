@@ -31,6 +31,8 @@
 </head>
 
 <body>
+
+    <!-- Flexbox container for vertical layout -->
     <div id="container">
         
         <!-- Canvas container -->
@@ -44,9 +46,15 @@
 
                 <!--Volume controller -->
                 <div id="volume-control">
+
+                    <!-- Volume percentage display -->
                     <span id="volumeValue"> 50 </span>
+
+                    <!-- Volume slider input ref:https://stackoverflow.com/questions/15935837/how-to-display-a-range-input-slider-vertically -->
                     <input type="range" id="volumeSlider" min="0" max="100" value="50">
+                    
                     <label for="volumeSlider">Vol</label>
+
                 </div>
 
                 <!--Turntable base -->

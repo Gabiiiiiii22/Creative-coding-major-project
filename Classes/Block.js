@@ -47,17 +47,22 @@ class Block {
 
     update() { //Smooth animation using lerp, to be called every frame for animated blocks
 
+        // Moves offsetX and offsetY 20% closer to targetOffsetX each frame
         this.offsetX = lerp(this.offsetX, this.targetOffsetX, 0.2);
         this.offsetY = lerp(this.offsetY, this.targetOffsetY, 0.2);
 
     }
 
     resetTransform() { // when music stops
-    this.scaleX = 1;
-    this.scaleY = 1;
-    this.offsetX = 0;
-    this.offsetY = 0;
-    this.targetOffsetX = 0;
-    this.targetOffsetY = 0;
+        
+        // Reset scale
+        this.scaleX = 1;
+        this.scaleY = 1;
+
+        // Reset position
+        this.offsetX = 0;
+        this.offsetY = 0;
+        this.targetOffsetX = 0;
+        this.targetOffsetY = 0;
     }
 }

@@ -1,7 +1,7 @@
-let song;
-let fft;
-let amplitude;
-let isPlaying = false;
+let song; // p5.SoundFile object - stores the loaded audio
+let fft; // p5.FFT object - analyzes audio frequencies
+let amplitude; // p5.Amplitude object - measures overall volume
+let isPlaying = false; // Boolean to track music playback state
 
 
 function setupAudio() {
@@ -10,44 +10,49 @@ function setupAudio() {
 
 function musicLoaded() {
     console.log('Music loaded');
+
+    // Create FFT (Fast Fourier Transform) analyzer
     fft = new p5.FFT(0.8, 64);
+
+    // Create Amplitude analyzer for overall volume
     amplitude = new p5.Amplitude();
 }
 
-// Use if/elese to toggle play/pause for music when button is clicked and update text on the button too
+// Use if/elese to toggle play/pause for music when tonearm is clicked and update text on the button too
 function toggleMusic() {
 
-    // get the elements
+    // get the elements by using p5.js select() https://p5js.org/reference/p5/select/
     let vinyl = select('#vinyl');
     let tonearm = select('#tonearm');
     let playText = select('#play-text');
 
+    // Check if song is currently playing
     if (song.isPlaying()) {
         song.pause();
         isPlaying = false;
 
         vinyl.removeClass('spinning'); // Stop animation
         tonearm.removeClass('playing');
-        playText.html('Click to Play'); //Change text
+        playText.html('Click to Play'); // Update text
 
 
     } else {
         song.loop(); // Loop the music continuously
         isPlaying = true;
 
-        vinyl.addClass('spinning'); // Start animation
+        vinyl.addClass('spinning'); // Add CSS animations by adding class names
         tonearm.addClass('playing');
-        playText.html('Click to Stop');
+        playText.html('Click to Stop'); // Update text
     }
 }
 
 // Function to apply audio effects to 1×1 blocks only (Blue, red, or gray)
-// to be callesalled every frame in draw()
+// to be called every frame in draw() in sketch.js
 function applyAudioToSmallBlocks(grid) {
 
     // If music not playing, reset all animations
     if (!isPlaying) {
-        for (let block of grid.blocks) {
+        for (let block of grid.blocks) { 
             block.resetTransform();
         }
         return;

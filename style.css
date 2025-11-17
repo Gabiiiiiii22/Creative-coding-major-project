@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* https://css-tricks.com/box-sizing/ */
 }
 
 body {
@@ -9,14 +9,14 @@ body {
     padding: 0;
     background-color: #f0edd4;
     font-family:'Helvetica', sans-serif;
-    overflow: hidden; /* Don't allow scrolling */
+    overflow: hidden; /* Don't allow scrolling, everything should fits in viewport */
 }
 
 /* Container for everything */
 #container {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    flex-direction: column; /* Stack the artwork and the UI vertically */
+    justify-content: flex-start; /* Center vertically in viewport */
     align-items: center;
     height: 100vh; /* make height Exactly viewport height */
     padding: 20px 20px 170px 20px;
@@ -24,7 +24,7 @@ body {
 
 main {
     position: relative;
-    flex-shrink: 0; /* Don't shrink canvas */
+    flex-shrink: 0; /* Don't shrink canvas to fit content */
     margin-top: auto;
     margin-bottom: auto;
 }
@@ -40,14 +40,14 @@ main {
     font-size: 12px;
     color: #333;
     font-weight: 600;
-    z-index: 102;
-    pointer-events: auto;
+    z-index: 101; /* Above turntable (z-index: 100) */
+    pointer-events: auto; /* Enable clicks (overrides parent's none) */
 }
 
 #volumeSlider {
     width: 80px; /* This becomes the height after rotation */
     height: 8px; /* This becomes the width after rotation */
-    transform: rotate(-90deg); /* Rotate to vertical */
+    transform: rotate(-90deg); /* Rotate to vertical ref https://stackoverflow.com/questions/15935837/how-to-display-a-range-input-slider-vertically */
     cursor: pointer;
     margin: 36px 0; /* Space for the rotated slider */
     background: #c0c0c0;
@@ -80,7 +80,7 @@ main {
     display: flex;
     align-items: flex-end;
     gap: 30px;
-    transform: translateY(50%);
+    transform: translateY(50%); /* Moves element down by 50% of its own height ref https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/transform */
 }
 
 #turntable-base {
@@ -100,10 +100,12 @@ main {
     transition: transform 0.3s ease;
 }
 
+/* Applied when music plays via JavaScript addClass('spinning') */
 #vinyl.spinning {
     animation: spin 3s linear infinite;
 }
 
+/* Defines the spinning animation https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@keyframes */
 @keyframes spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
@@ -122,7 +124,7 @@ main {
 }
 
 #tonearm-container:hover {
-    transform: scale(1.05);
+    transform: scale(1.05); /* Enlarge by 5% */
 }
 
 #play-text {
@@ -146,7 +148,8 @@ main {
 }
 
 #tonearm.playing {
-    transform: rotate(-7deg) translateY(30px);
+    
+    transform: rotate(-7deg) translateY(30px); /* Rotate and translate to simulate tonearm lowering onto record */
 
 }
 
