@@ -79,6 +79,15 @@ My animation+6 **intentionally pauses** fully assembled before disappearing, hei
 
 ## **4. Inspirational References**
 
+### ✦ **Conceptual Link to Sydney**
+
+This animation is not only based on Mondrian’s geometric language but also mirrors the rhythm of Sydney itself.
+
+* The **scatter** phase evokes the *morning movement of people spreading across the city.*
+* The **pulsing colours** reflect *Sydney’s energetic cultural heartbeat.*
+* The **return phase** aligns with the *quiet recentering of the city toward evening.*
+* The **final disappearance** suggests the *calm, near-silent state the city enters late at night.*
+
 ### ✦ **Scatter / Motion Inspiration**
 
 * Piet Mondrian’s *Boogie Woogie* rhythmic compositions
