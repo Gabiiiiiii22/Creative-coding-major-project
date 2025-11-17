@@ -73,8 +73,8 @@ function applyAudioToSmallBlocks(grid) {
         // // Blue 1×1 blocks: Bounce up/down with bass
         
         if (color === grid.colors.blue1 || color === grid.colors.blue2) {
-            // Even numbered blocks (0, 2, 4...) bounce vertically
-            // Odd numbered blocks (1, 3, 5...) bounce horizontally
+            // Even numbered blocks bounce vertically
+            // Odd numbered blocks bounce horizontally
             if (i % 2 === 0) {
                 applyBounceUpDown(block, bass, i); // Vertical
             } else {
@@ -99,10 +99,10 @@ function applyAudioToSmallBlocks(grid) {
 
 // Bouce effect for blue blocks (up-down)
 function applyBounceUpDown(block, bass, index){
-    // Map bass energy to bounce distance (0-30 pixels)
-    let bounceAmount = map(bass, 0, 255, 0, 30); // if base 0, no bounce. If base loud (255), bouce 30 pixels
+    // Map bass energy to bounce distance (0-10 pixels)
+    let bounceAmount = map(bass, 0, 255, 0, 10); // if base 0, no bounce. If base loud (255), bouce 30 pixels
 
-    let offset = sin(frameCount * 0.17 + index) * bounceAmount;
+    let offset = sin(frameCount * 0.1 + index) * bounceAmount;
 
     block.targetOffsetY = -abs(offset); // upward bounce
     block.targetOffsetX = 0; // No horizontal movement
