@@ -54,6 +54,7 @@ const GRAIN_REZ = 0.08;    // Noise density (smaller = rougher texture)
 const GRAIN_BINS = 6;      // Brightness quantization levels
 const GRAIN_CONTRAST = 24; // Brightness contrast intensity
 const Z_SPEED = 0.05;      // Flowing speed
+```
 
 ## Inspirations & References
 
