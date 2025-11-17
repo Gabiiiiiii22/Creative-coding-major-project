@@ -1,5 +1,5 @@
 # Creative-coding-major-project
-# *Sydney Boogie Woogie – Flowing Embossed Texture Animation*  
+# *Sydney Boogie Woogie: Flowing Embossed Texture Animation*  
 **Individual Project｜Gina Wang**
 
 ---
