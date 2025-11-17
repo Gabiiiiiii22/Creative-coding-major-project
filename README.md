@@ -26,7 +26,9 @@ An audio-reactive animation of Piet Mondrian's "Broadway Boogie Woogie" (1942-43
 - The canvas automatically adjusts to your screen size (200px minimum, 900px maximum)
 - The vinyl turntable remains fixed at the bottom, showing only the top half
 
+
 ---
+
 
 ## Animation Approach
 
@@ -56,7 +58,9 @@ I chose **audio** as the primary driver for my individual code. The animation an
 - **Animation**: None - static structural elements
 - **Purpose**: Maintain the original Mondrian grid structure as a stable reference point
 
+
 ---
+
 
 ## Technical Explanation
 
@@ -89,7 +93,9 @@ I chose **audio** as the primary driver for my individual code. The animation an
 - Prevents synchronized movement that seems stiff
 - Creates wave-like propagation across the canvas
 
+
 ---
+
 
 ### External Techniques Used
 
@@ -104,7 +110,9 @@ I chose **audio** as the primary driver for my individual code. The animation an
 - **Source**: CSS animation specification
 - **Why**: Smooth, performant spinning animation for vinyl
 
+
 ---
+
 
 ## Major Changes from Group Code
 
@@ -115,7 +123,9 @@ I chose **audio** as the primary driver for my individual code. The animation an
 5. **Responsive canvas sizing** - Recalculated available space for the artwork after accounting for UI elements
 6. **Separated animation logic** - Created dedicated interaction.js for audio-reactive code
 
+
 ---
+
 
 ##  Music Track
 The project uses ["Jazz Background Music"](https://pixabay.com/music/traditional-jazz-jazz-background-music-426859/) by Tatamusic
